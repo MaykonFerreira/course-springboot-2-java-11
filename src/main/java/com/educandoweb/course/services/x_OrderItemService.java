@@ -11,7 +11,7 @@ import com.educandoweb.course.entities.pk.OrderItemPK;
 import com.educandoweb.course.repositores.OrderItemRepository;
 
 @Service
-public class OrderItemService {
+public class x_OrderItemService {
 
 	@Autowired
 	private OrderItemRepository repository;

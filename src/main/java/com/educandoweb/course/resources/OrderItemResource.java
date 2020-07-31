@@ -11,24 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.educandoweb.course.entities.OrderItem;
 import com.educandoweb.course.entities.pk.OrderItemPK;
-import com.educandoweb.course.services.OrderItemService;
+import com.educandoweb.course.services.x_OrderItemService;
 
 @RestController
 @RequestMapping(value="/items")
 public class OrderItemResource {
 
 	@Autowired
-	private OrderItemService service;
+	private x_OrderItemService service;
 	
 	@GetMapping
 	public ResponseEntity <List<OrderItem>> findAll() {
-	    //OrderItem u = new OrderItem(1L, "Maria", "maria@gmail", "99999999", "123456");
 		List<OrderItem> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 		//return null;
 	} 
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/{Items}")
 	public ResponseEntity<OrderItem> findById(@PathVariable OrderItemPK id){
 		OrderItem obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);

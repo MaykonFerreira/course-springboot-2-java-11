@@ -34,18 +34,15 @@ public class Order implements Serializable{
 	private Instant moment;
 	
 	private Integer orderStatus;
-	
-	
-	
 	// Comando para chave estrangeira
 	//@JsonIgnore // não carrega a relação (N to N)
+	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
 	
 	@OneToMany(mappedBy= "id.order")
 	private Set<OrderItem> items = new HashSet<>();
-	
 	
 	//Utilizado para mapeamento de 1 para 1 onde tem o mesmo ORDER
 	@OneToOne(mappedBy="order" , cascade = CascadeType.ALL )
@@ -66,6 +63,17 @@ public class Order implements Serializable{
 	public Set<OrderItem> getItems(){
 		return items;
 	}
+	
+	public Double getTotal() {
+		double sum = 0.0;
+		
+		for (OrderItem x : items) {
+			sum += x.getSubTotal();
+		}
+		
+		return sum;
+	}
+	
 	
 	@Override
 	public int hashCode() {

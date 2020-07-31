@@ -10,26 +10,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educandoweb.course.entities.OrderItem;
-import com.educandoweb.course.services.OrderService;
+import com.educandoweb.course.entities.pk.OrderItemPK;
+import com.educandoweb.course.services.OrderItemService;
 
 @RestController
 @RequestMapping(value="/items")
 public class OrderItemResource {
 
 	@Autowired
-	private OrderService service;
+	private OrderItemService service;
 	
-	//@GetMapping
-	//public ResponseEntity <List<OrderItem>> findAll() {
-		//Order u = new Order(1L, "Maria", "maria@gmail", "99999999", "123456");
-		//List<OrderItem> list = service.findAll();
-		//return ResponseEntity.ok().body(list);
-	//} 
+	@GetMapping
+	public ResponseEntity <List<OrderItem>> findAll() {
+	    //OrderItem u = new OrderItem(1L, "Maria", "maria@gmail", "99999999", "123456");
+		List<OrderItem> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+		//return null;
+	} 
 	
-	//@GetMapping(value = "/{id}")
-	//public ResponseEntity<OrderItem> findById(@PathVariable Long id){
-		//OrderItem obj = service.findById(id);
-		//return ResponseEntity.ok().body(obj);
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<OrderItem> findById(@PathVariable OrderItemPK id){
+		OrderItem obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
 		
-	//}
+	}
 }
